@@ -1,10 +1,10 @@
 :host {
   display: block;
-  background-color: #fbfbfb;
+  background-color: #0000003b;
 }
 
 .container {
-  padding: .5em;
+  padding: 0.5em;
   font-family: monospace;
   font-size: 1.2em;
   resize: vertical;
@@ -38,8 +38,8 @@ li.indented {
   word-break: break-all;
 }
 
-label+ul,
-li+li {
+label + ul,
+li + li {
   margin-top: 0.15em;
 }
 
@@ -54,17 +54,17 @@ li+li {
 }
 
 .json-value.string {
-  color: #158a19;
+  color: light-dark(#158a19, #14b519);
 }
 
 .json-value.null,
 .json-value.number,
 .json-value.boolean {
-  color: #b77700;
+  color: light-dark(#b77700, #d08904);
 }
 
 .json-info {
-  color: rgb(100, 100, 100);
+  color: light-dark(rgb(100, 100, 100), #bbb);
 }
 
 button,

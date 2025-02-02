@@ -98,7 +98,7 @@ td:last-child {
   padding-left: 0.5em;
   width: 100%;
   align-content: center;
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: light-dark(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.16));
   border-radius: 0 5px 5px 0;
 }
 
