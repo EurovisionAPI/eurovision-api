@@ -1,0 +1,109 @@
+app-documentation {
+  display: block;
+  margin: auto;
+  padding: 1em;
+  max-width: 1000px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 1.75em;
+}
+
+h1:first-child {
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h1,
+h2,
+h3 {
+  margin-block: 1em 0.5em;
+}
+
+p {
+  margin-block: 0;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+/* Aplica a las filas impares */
+tr:nth-child(even) {
+  background-color: rgba(50, 50, 255, 0.1);
+}
+
+th {
+  background-color: rgba(0, 50, 255, 0.25);
+}
+
+tr,
+th,
+td {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+th,
+td {
+  padding: 0.2em 0.3em;
+}
+
+th:first-child,
+td:first-child,
+th:nth-child(2),
+td:nth-child(2) {
+  max-width: min-content;
+  white-space: nowrap;
+}
+
+th:last-child,
+td:last-child {
+  width: 100%;
+}
+
+.endpoint-viewer {
+  margin-top: 1em;
+  width: 100%;
+}
+
+.endpoint {
+  display: flex;
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.method {
+  padding: 0.3em 0.5em;
+  background-color: rgb(58, 130, 255);
+  color: white;
+  border-radius: 5px 0 0 5px;
+}
+
+.url {
+  padding-left: 0.5em;
+  width: 100%;
+  align-content: center;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 0 5px 5px 0;
+}
+
+table,
+.endpoint-viewer {
+  display: inline-block;
+  margin-bottom: 0.5em;
+}

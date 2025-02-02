@@ -1,0 +1,17 @@
+@HostAddress = http://localhost:5281/api
+
+
+GET {{HostAddress}}/countries/
+Accept: application/json
+
+###
+
+GET {{HostAddress}}/contests/
+Accept: application/json
+
+###
+
+GET {{HostAddress}}/junior/contests/
+Accept: application/json
+
+###

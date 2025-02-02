@@ -1,0 +1,12 @@
+h1 {
+  text-align: center;
+  text-wrap: balance;
+}
+
+section {
+  margin: auto;
+  padding: 0.5em 1em;
+  width: 100%;
+  max-width: 800px;
+  line-height: 1.5;
+}

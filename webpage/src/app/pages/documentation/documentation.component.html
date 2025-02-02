@@ -1,0 +1,25 @@
+@if (documentation) {
+  @for (item of documentation.content; track $index) {
+    @if (item.type === DocItemType.HTML) {
+      <div #markdownContainer [outerHTML]="item.value"></div>
+      <!--<ng-container [innerHTML]="item.value"></ng-container>-->
+    } @else {
+      <ng-container
+        *ngTemplateOutlet="endpointViewer; context: { data: item.value }"
+      ></ng-container>
+    }
+  }
+}
+
+<ng-template #endpointViewer let-data="data">
+  <div class="endpoint-viewer">
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <span class="url">{{ data.endpoint }}</span>
+    </div>
+    <app-json-viewer
+      [json]="data.example"
+      [maxSizeStartExpanded]="10"
+    ></app-json-viewer>
+  </div>
+</ng-template>

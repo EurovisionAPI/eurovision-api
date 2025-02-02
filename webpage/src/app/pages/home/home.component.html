@@ -1,0 +1,25 @@
+<div class="page">
+  <section class="header">
+    <h1>Eurovision API</h1>
+    <h2>The RESTful Eurovision API</h2>
+  </section>
+
+  <section class="test">
+    <h3>Try it now!</h3>
+    <form (ngSubmit)="sendRequest()">
+      <label>{{apiUrl}}</label>
+      <input type="text" [(ngModel)]="requestUrl" [ngModelOptions]="{standalone: true}" />
+      <button class="copy" title="Copy to clipboard" (click)="copyToClipboard()">
+        <svg>
+          <use width="100%" height="100%" xlink:href="images/copy_icon.svg#copy_icon" />
+        </svg>
+      </button>
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="response">
+      <div class="title">Response:</div>
+      <app-json-viewer [json]="response"></app-json-viewer>
+    </div>
+  </section>
+</div>

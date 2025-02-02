@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  background-color: #fbfbfb;
+}
+
+.container {
+  padding: .5em;
+  font-family: monospace;
+  font-size: 1.2em;
+  resize: vertical;
+  overflow-y: auto;
+  min-height: 5em;
+  height: auto;
+  max-height: 32em;
+}
+
+.footer {
+  padding: 0.25em;
+  border-top: 1px solid #ccc;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  position: relative;
+  margin-left: 1.25em;
+}
+
+li.indented {
+  padding-left: 1em;
+  user-select: text;
+  overflow-wrap: break-word;
+  text-indent: -1em;
+  word-break: break-all;
+}
+
+label+ul,
+li+li {
+  margin-top: 0.15em;
+}
+
+.json-key {
+  margin-right: 0.5em;
+}
+
+.json-value {
+  overflow-wrap: break-word;
+  text-indent: 0.5em;
+  word-break: break-all;
+}
+
+.json-value.string {
+  color: #158a19;
+}
+
+.json-value.null,
+.json-value.number,
+.json-value.boolean {
+  color: #b77700;
+}
+
+.json-info {
+  color: rgb(100, 100, 100);
+}
+
+button,
+input,
+label {
+  cursor: pointer;
+}
+
+button {
+  position: absolute;
+  left: -1.25em;
+  margin-right: 0.5em;
+  padding-inline: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 0.6em;
+  transition: transform 150ms;
+}
+
+button.expanded {
+  transform: rotateZ(90deg);
+}
+
+pre {
+  margin: 0;
+  line-height: 1.4;
+  height: max-content;
+  width: max-content;
+}

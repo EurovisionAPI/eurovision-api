@@ -1,0 +1,40 @@
+<div class="container">
+  @if (jsonRoot) {
+  @if (showRaw) {
+  <pre>{{jsonRaw}}</pre>
+  } @else {
+  <ng-container *ngTemplateOutlet="jsonTree; context: {parent: jsonRoot}"></ng-container>
+  }
+  }
+
+</div>
+<div class="footer">
+  <label>
+    <input type="checkbox" [(ngModel)]="showRaw" [ngModelOptions]="{standalone: true}" />
+    View raw JSON ({{totalBytes}} kB, {{totalLines}} lines)
+  </label>
+</div>
+
+<ng-template #jsonTree let-parent="parent">
+  <ul>
+    @for (node of getChildren(parent); track $index) {
+    <li [ngClass]="{indented: !node.isExpandable}">
+      @if (node.isExpandable) {
+      <label>
+        <button [ngClass]="{expanded: node.expanded}" (click)="toggleNode(node)">
+          ▶
+        </button>
+        <span class="json-key">{{ node.key }}:</span>
+        <span class="json-info">{{ node.info }}</span>
+      </label>
+      } @else {
+      <span class="json-key">{{ node.key }}:</span>
+      <span class="json-value" [ngClass]="node.type.toString()">{{ node.value }}</span>
+      }
+      @if (node.expanded) {
+      <ng-container *ngTemplateOutlet="jsonTree; context: {parent: node}"></ng-container>
+      }
+    </li>
+    }
+  </ul>
+</ng-template>
