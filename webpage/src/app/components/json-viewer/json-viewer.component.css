@@ -1,6 +1,6 @@
 :host {
   display: block;
-  background-color: #0000003b;
+  background-color: light-dark(#f6f6f6, #2f2f2f);
 }
 
 .container {

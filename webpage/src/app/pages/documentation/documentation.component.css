@@ -67,7 +67,6 @@ th:first-child,
 td:first-child,
 th:nth-child(2),
 td:nth-child(2) {
-  max-width: min-content;
   white-space: nowrap;
 }
 
