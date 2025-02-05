@@ -49,5 +49,5 @@ jobs:
         server: ${{ secrets.FTP_URL }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local-dir: ./$PUBLISH_FOLDER/
+        local-dir: ${{ env.SERVER_FOLDER }}/${{ env.PUBLISH_FOLDER }}/
         server-dir: /wwwroot/
