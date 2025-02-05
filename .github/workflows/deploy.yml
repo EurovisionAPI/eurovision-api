@@ -32,7 +32,10 @@ jobs:
     - name: Install Angular CLI
       run: npm install -g @angular/cli
 
-    - name: Instalar npm packages
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install npm packages
       run: npm install
       working-directory: ${{ env.CLIENT_FOLDER }}
 
