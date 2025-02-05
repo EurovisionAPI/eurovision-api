@@ -24,7 +24,7 @@ jobs:
       with:
         dotnet-version: 9.0.x
 
-    - name: Install Node.js y Angular
+    - name: Install Node.js and Angular
       uses: actions/setup-node@v4
       with:
         node-version: '22'
@@ -50,4 +50,4 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
         local-dir: ./$PUBLISH_FOLDER/
-        server-dir: /wwwroot
+        server-dir: /wwwroot/
