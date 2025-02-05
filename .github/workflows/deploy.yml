@@ -34,11 +34,11 @@ jobs:
 
     - name: Instalar npm packages
       run: npm install
-      working-directory: ${{ CLIENT_FOLDER }}
+      working-directory: ${{ env.CLIENT_FOLDER }}
 
     - name: Build
       run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER
-      working-directory: ${{ SERVER_FOLDER }}
+      working-directory: ${{ env.SERVER_FOLDER }}
 
     - name: Deploy with FTP
       uses: SamKirkland/FTP-Deploy-Action@v4
