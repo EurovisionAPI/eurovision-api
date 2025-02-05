@@ -76,7 +76,7 @@ It returns a collection of all references to contests held. Each contest referen
 | url | string | Endpoint to get contest details |
 
 
-## Get contests details (endpoint)
+## Get contest details (endpoint)
 
 It returns all data for a contest. The contestants in the contest is a collection of references to contestants. As with contest references, contestant references include basic contest data and an endpoint to retrieve contestant details.
 
