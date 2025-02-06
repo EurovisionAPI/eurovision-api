@@ -19,8 +19,6 @@
     <Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
 		<Message Text="wwroot carpeta proyecto" Importance="high" />
 		<Exec Command="ls $(ProjectDir)/wwwroot" />
-		<Message Text="Salida compilacion" Importance="high" />
-		<Exec Command="ls $(OutputPath)" />
   </Target>
 
 </Project>
