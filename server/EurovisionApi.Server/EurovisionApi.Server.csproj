@@ -11,15 +11,15 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
   </ItemGroup>
 
-  <Target Name="BuildAngular" BeforeTargets="PreBuildEvent">
+  <Target Name="BuildAngular" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
       <AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
     </PropertyGroup>
     <Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
-		<Message Text="wwroot carpeta proyecto" />
+		<Message Text="wwroot carpeta proyecto" Importance="high" />
 		<Exec Command="ls $(ProjectDir)/wwwroot" />
-		<Message Text="Salida compilacion" />
+		<Message Text="Salida compilacion" Importance="high" />
 		<Exec Command="ls $(OutputPath)" />
   </Target>
 
