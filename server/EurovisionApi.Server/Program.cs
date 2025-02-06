@@ -21,9 +21,9 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
-            app.UseCors(options => options.AllowAnyOrigin());
         }
 
+        app.UseCors(options => options.AllowAnyOrigin());
         app.UseHttpsRedirection();
         app.UseRouting();
         app.MapStaticAssets();
