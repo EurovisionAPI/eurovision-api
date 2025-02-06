@@ -17,8 +17,6 @@
 			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
 		</PropertyGroup>
 		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
-		<Message Text="wwroot carpeta proyecto" Importance="high" />
-		<Exec Command="ls $(ProjectDir)/wwwroot" />
 	</Target>
 
 	<Target Name="BuildAngularPublish" BeforeTargets="Initial" Condition="'$(Configuration)' == 'Release'">
