@@ -26,11 +26,11 @@ public class Program
         app.UseCors(options => options.AllowAnyOrigin());
         app.UseHttpsRedirection();
         app.UseRouting();
-        app.MapStaticAssets();
 
         app.UseAuthentication();
         app.UseAuthorization();
 
+        app.MapStaticAssets();
         app.MapControllers();
         app.Map("api/{**slug}", HandleApiFallbackAsync); // Si no se encuentra la ruta en la API, devolver 404
         app.MapFallbackToFile("index.html"); // Configurar rutas para servir Angular
