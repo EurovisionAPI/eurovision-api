@@ -11,14 +11,22 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
   </ItemGroup>
 
-  <Target Name="BuildAngular" BeforeTargets="BeforeBuild">
-    <PropertyGroup>
-      <AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
-      <AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
-    </PropertyGroup>
-    <Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
+	<Target Name="BuildAngular">
+		<PropertyGroup>
+			<AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
+			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
+		</PropertyGroup>
+		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
 		<Message Text="wwroot carpeta proyecto" Importance="high" />
 		<Exec Command="ls $(ProjectDir)/wwwroot" />
-  </Target>
+	</Target>
+
+	<Target Name="BuildAngularPublish" BeforeTargets="Initial" Condition="'$(Configuration)' == 'Release'">
+		<CallTarget Targets="BuildAngular" />
+	</Target>
+
+	<Target Name="BuildAngularDebug" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+		<CallTarget Targets="BuildAngular" />
+	</Target>
 
 </Project>
