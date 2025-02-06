@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>annotations</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-		<AngularAppPath>../../webpage</AngularAppPath>
+    <AngularAppPath>../../webpage</AngularAppPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,12 +15,12 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-	<Target Name="BuildAngular" BeforeTargets="Build">
-		<PropertyGroup>
+  <Target Name="BuildAngular" BeforeTargets="Build">
+    <PropertyGroup>
       <AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
       <AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
     </PropertyGroup>
-		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" />
-	</Target>
+    <Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" />
+  </Target>
 
 </Project>
