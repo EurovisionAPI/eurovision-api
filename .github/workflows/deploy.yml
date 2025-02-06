@@ -51,3 +51,4 @@ jobs:
         password: ${{ secrets.FTP_PASS }}
         local-dir: ${{ env.SERVER_FOLDER }}/${{ env.PUBLISH_FOLDER }}/
         server-dir: /wwwroot/
+        dangerous-clean-slate: true
