@@ -17,6 +17,8 @@
       <AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
     </PropertyGroup>
     <Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
+		<Exec Command="ls $(ProjectDir)" />
+		<Exec Command="ls $(ProjectDir)/wwwroot" />
   </Target>
 
 </Project>
