@@ -41,6 +41,7 @@ jobs:
 
     - name: Restore NuGet packages
       run: dotnet restore
+      working-directory: ${{ env.SERVER_FOLDER }}
 
     - name: Build
       run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER
