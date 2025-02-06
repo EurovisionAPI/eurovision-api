@@ -19,11 +19,6 @@ jobs:
 
     steps:
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 9.0.x
-
     - name: Install Node.js and Angular
       uses: actions/setup-node@v4
       with:
@@ -38,6 +33,14 @@ jobs:
     - name: Install npm packages
       run: npm install
       working-directory: ${{ env.CLIENT_FOLDER }}
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Restore NuGet packages
+      run: dotnet restore
 
     - name: Build
       run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER
