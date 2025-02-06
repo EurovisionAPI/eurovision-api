@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
   </ItemGroup>
 
-  <Target Name="BuildAngular" BeforeTargets="Build">
+  <Target Name="BuildAngular" BeforeTargets="ResolveReferences">
     <PropertyGroup>
       <AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
       <AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>

@@ -1,0 +1,52 @@
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[0].use[2]!./src/styles.css?ngGlobalStyle ***!
+  \**********************************************************************************************************************************************************************************************************************/
+:root {
+  color-scheme: light dark;
+  --brand-color: darkblue;
+  --brand-text-color: white;
+}
+
+html,
+body {
+  margin: 0;
+  background-color: light-dark(transparent, #363636);
+  color: light-dark(black, white);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+header,
+footer {
+  padding: 10px;
+  background-color: var(--brand-color);
+  color: var(--brand-text-color);
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+/*------------- Fonts --------------*/
+
+@font-face {
+  font-family: "Eurovision";
+  src: url("/fonts/Eurotype2016.ttf") format("truetype");
+}
+
+/*---------------------------------*/
+
+@media (max-width: 700px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+
+/*# sourceMappingURL=styles.css.map*/
