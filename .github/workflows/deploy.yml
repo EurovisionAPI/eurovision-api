@@ -35,13 +35,12 @@ jobs:
       working-directory: ${{ env.CLIENT_FOLDER }}
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 9.0.x
 
-    - name: Restore NuGet packages
-      run: dotnet restore
-      working-directory: ${{ env.SERVER_FOLDER }}
+    - name: Show dotnet version
+      run: dotnet --version
 
     - name: Build
       run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER

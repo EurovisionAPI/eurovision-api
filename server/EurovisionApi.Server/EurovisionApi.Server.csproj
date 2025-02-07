@@ -11,24 +11,20 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
   </ItemGroup>
 
-	<Target Name="Debug" AfterTargets="BeforeBuild">
-		<Exec Command="ls $(ProjectDir)wwwroot" />
-	</Target>
-
-	<Target Name="BuildAngular" BeforeTargets="BeforeBuild">
+	<Target Name="BuildAngular">
 		<PropertyGroup>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
 		</PropertyGroup>
 		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
 	</Target>
-<!--
-	<Target Name="BuildAngularPublish" AfterTargets="ResolveReferences" Condition="'$(Configuration)' == 'Release'">
+
+	<Target Name="BuildAngularPublish" BeforeTargets="Restore" Condition="'$(Configuration)' == 'Release'">
 		<CallTarget Targets="BuildAngular" />
 	</Target>
 
 	<Target Name="BuildAngularDebug" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
 		<CallTarget Targets="BuildAngular" />
 	</Target>
--->
+
 </Project>
