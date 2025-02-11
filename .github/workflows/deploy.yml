@@ -46,12 +46,10 @@ jobs:
       run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER
       working-directory: ${{ env.SERVER_FOLDER }}
 
-    - name: Deploy with FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+    - name: Deploy to MonsterASP.NET via WebDeploy
+      uses: rasmusbuchholdt/simply-web-deploy@2.1.0
       with:
-        server: ${{ secrets.FTP_URL }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASS }}
-        local-dir: ${{ env.SERVER_FOLDER }}/${{ env.PUBLISH_FOLDER }}/
-        server-dir: /wwwroot/
-        dangerous-clean-slate: true
+        website-name: ${{ secrets.WEBSITE_NAME }}
+        server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+        server-username: ${{ secrets.SERVER_USERNAME }}
+        server-password: ${{ secrets.SERVER_PASSWORD }}
