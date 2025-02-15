@@ -38,9 +38,8 @@ public class Program
         await app.RunAsync();
     }
 
-    private static Task HandleApiFallbackAsync(HttpContext context)
+    private static IResult HandleApiFallbackAsync(HttpContext context)
     {
-        context.Response.StatusCode = StatusCodes.Status404NotFound;
-        return context.Response.WriteAsync($"Cannot {context.Request.Method} {context.Request.Path}");
+        return Results.NotFound($"Cannot {context.Request.Method} {context.Request.Path}");
     }
 }

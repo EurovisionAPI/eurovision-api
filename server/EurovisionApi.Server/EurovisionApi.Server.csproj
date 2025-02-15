@@ -4,7 +4,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>annotations</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AngularAppPath>../../webpage</AngularAppPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +12,7 @@
 
 	<Target Name="BuildAngular">
 		<PropertyGroup>
+			<AngularAppPath>../../webpage</AngularAppPath>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
 		</PropertyGroup>

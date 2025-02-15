@@ -18,38 +18,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install Node.js and Angular
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    - name: Install Node.js and Angular
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@18
 
-    - name: Install Angular CLI
-      run: npm install -g @angular/cli@18
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Install npm packages
+        run: npm install
+        working-directory: ${{ env.CLIENT_FOLDER }}
 
-    - name: Install npm packages
-      run: npm install
-      working-directory: ${{ env.CLIENT_FOLDER }}
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 9.0.x
+      - name: Show dotnet version
+        run: dotnet --version
 
-    - name: Show dotnet version
-      run: dotnet --version
+      - name: Build
+        run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER
+        working-directory: ${{ env.SERVER_FOLDER }}
 
-    - name: Build
-      run: dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o ./$PUBLISH_FOLDER
-      working-directory: ${{ env.SERVER_FOLDER }}
+      # Turn off deployed service
+      - name: Create empty app_offline.htm file
+        run: |
+          mkdir -p ./offline
+          touch ./offline/app_offline.html
 
-    - name: Deploy to MonsterASP.NET via WebDeploy
-      uses: rasmusbuchholdt/simply-web-deploy@2.1.0
-      with:
-        website-name: ${{ secrets.WEBSITE_NAME }}
-        server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-        server-username: ${{ secrets.SERVER_USERNAME }}
-        server-password: ${{ secrets.SERVER_PASSWORD }}
+      - name: Turn off deployed service
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_URL }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./offline/
+          server-dir: /wwwroot/
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_URL }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ${{ env.SERVER_FOLDER }}/${{ env.PUBLISH_FOLDER }}/
+          server-dir: /wwwroot/
+          dangerous-clean-slate: true
