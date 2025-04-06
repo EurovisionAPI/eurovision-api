@@ -14,7 +14,7 @@ on:
       - main
     paths:
       - 'server/**'
-      - 'webpage/**
+      - 'webpage/**'
 
 jobs:
   build-and-deploy:
