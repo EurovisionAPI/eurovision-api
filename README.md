@@ -1,1 +1,1 @@
-# EurovisionAPI
+# Unofficial Eurovision API
