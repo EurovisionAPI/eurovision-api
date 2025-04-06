@@ -12,6 +12,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'server/**'
+      - 'webpage/**
 
 jobs:
   build-and-deploy:
