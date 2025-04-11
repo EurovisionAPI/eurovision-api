@@ -1,4 +1,4 @@
-#❤️ Unofficial Eurovision Song Contest API ❤️
+# ❤️ Unofficial Eurovision Song Contest API ❤️
 
 This site is a freely accessible API that contains information about the participants and votes of all editions of the Eurovision Song Contest and Junior Eurovision Song Contest.
 
