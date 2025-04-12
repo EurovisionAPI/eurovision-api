@@ -19,7 +19,11 @@
 
     <div class="response">
       <div class="title">Response:</div>
+      @if (hasError) {
+      <div class="not-found">Resource not found :(</div>
+      } @else if (response) {
       <app-json-viewer [json]="response"></app-json-viewer>
+      }
     </div>
   </section>
 </div>

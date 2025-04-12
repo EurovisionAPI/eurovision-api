@@ -1,7 +1,6 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using EurovisionApi.Server.Database.Models.Dataset;
 using EurovisionApi.Server.Database.Repositories;
-using Microsoft.Extensions.Configuration;
 
 namespace EurovisionApi.Server.Database;
 
@@ -21,6 +20,8 @@ public class DataContext
 
         return dataContext;
     }
+
+    private DataContext() { }
 
     private Task DownloadDataAsync(string deployUrl)
     {

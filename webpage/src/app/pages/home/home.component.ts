@@ -8,15 +8,15 @@ import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.co
   standalone: true,
   imports: [FormsModule, JsonViewerComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-
   apiUrl: string;
   requestUrl = 'contests/2024';
   response: object;
+  hasError: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {}
 
   async ngOnInit(): Promise<void> {
     this.apiUrl = this.api.getApiUrl();
@@ -28,6 +28,11 @@ export class HomeComponent implements OnInit {
   }
 
   async sendRequest(): Promise<void> {
-    this.response = await this.api.get(this.requestUrl);
+    try {
+      this.response = await this.api.get(this.requestUrl);
+      this.hasError = false;
+    } catch (error) {
+      this.hasError = true;
+    }
   }
 }

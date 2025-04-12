@@ -108,6 +108,11 @@ button[type="submit"] {
   font-size: 1.2em;
 }
 
+.not-found {
+  padding: 1em;
+  font-weight: bold;
+}
+
 @media (max-width: 500px) {
   button.copy {
     border-radius: 0 10px 10px 0px;
