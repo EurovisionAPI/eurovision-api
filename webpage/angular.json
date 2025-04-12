@@ -15,12 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": {
-              "base": "dist/webpage"
-            },
+            "outputPath": "dist/webpage",
             "index": "src/index.html",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -34,8 +33,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "browser": "src/main.ts"
+            "scripts": []
           },
           "configurations": {
             "production": {
