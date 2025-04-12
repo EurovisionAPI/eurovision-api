@@ -5,7 +5,6 @@ import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.co
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [FormsModule, JsonViewerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',

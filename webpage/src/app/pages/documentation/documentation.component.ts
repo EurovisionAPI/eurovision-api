@@ -7,7 +7,6 @@ import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-documentation',
-  standalone: true,
   imports: [JsonViewerComponent, NgTemplateOutlet],
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.css',

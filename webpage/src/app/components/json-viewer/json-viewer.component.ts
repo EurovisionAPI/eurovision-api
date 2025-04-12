@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-json-viewer',
-  standalone: true,
   imports: [NgClass, NgTemplateOutlet, FormsModule],
   templateUrl: './json-viewer.component.html',
   styleUrl: './json-viewer.component.css',
