@@ -213,17 +213,17 @@ It returns all data for a contest. The contestants in the contest is a collectio
 
 | Attribute | Type | Description |  
 |---|---|---|
-| id | integer | Contestant ID (used in Performance ) |
+| id | integer | Contestant ID (used in Performance) |
 | country | string | Code of the country that is represented |
 | artist | string | Name of the singer/group performing |
 | song | string | Song title |
-| url | string | All lyrics of the song with translations (in the corresponding language). The first lyrics is the original. |
+| url | string | Endpoint to get contestant details |
 
 ### Round (scheme)
 
 | Attribute     | Type          | Description                                                                                                                    |
 | ------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| name          | string        | Round name (final, semifinal if the year is between 2004 and 2007, semifinal1 or semifinal2 if the year is greater than 2007 ) |
+| name          | string        | Round name (final, semifinal if the year is between 2004 and 2007, semifinal1 or semifinal2 if the year is greater than 2007) |
 | date          | string        | Date when the round was held in UTC                                                                                            |
 | time          | string        | Time when the round was held in UTC                                                                                            |
 | performances  | Performance[] | Results of the performances of the contestants in this round                                                                   |
