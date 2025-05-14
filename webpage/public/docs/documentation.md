@@ -300,7 +300,7 @@ It represents each of the contestant songs of the edition.
 | artist | string | Name of the singer/group performing |
 | song | string | Song title |
 | lyrics | Lyrics[] | All lyrics of the song with translations (in the corresponding language). The first lyrics is the original. |
-| videoUrl | string[] | All links to a Youtube videos showing the song |
+| videoUrls | string[] | Links to a Youtube videos showing the song |
 | tone | string | Key and scale of the song |
 | bpm | integer | Beats per minute of the song |
 | dancers | string[] | Song dancers |
