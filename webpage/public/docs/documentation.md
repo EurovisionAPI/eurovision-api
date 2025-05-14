@@ -295,7 +295,7 @@ It represents each of the contestant songs of the edition.
 
 | Attribute | Type | Description |  
 |---|---|---|
-| id | integer | Contestant ID (used in Performance ) |
+| id | integer | Contestant ID (used in Performance) |
 | country | string | Code of the country that is represented |
 | artist | string | Name of the singer/group performing |
 | song | string | Song title |
