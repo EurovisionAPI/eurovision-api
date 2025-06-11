@@ -1,4 +1,4 @@
-﻿using EurovisionApi.Server.Database.Models.Common;
+using EurovisionApi.Server.Database.Models.Common;
 
 namespace EurovisionApi.Server.Database.Models.Dataset;
 
@@ -11,9 +11,8 @@ public class Contest : IContest
     public string IntendedCountry { get; set; }
     public string Slogan { get; set; }
     public string LogoUrl { get; set; }
-    public string Voting { get; set; }
-    public string[] Presenters { get; set; }
     public string[] Broadcasters { get; set; }
+    public string[] Presenters { get; set; }
     public Contestant[] Contestants { get; set; }
     public Round[] Rounds { get; set; }
 }

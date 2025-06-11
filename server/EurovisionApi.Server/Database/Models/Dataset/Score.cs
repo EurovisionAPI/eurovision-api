@@ -1,4 +1,4 @@
-﻿namespace EurovisionApi.Server.Database.Models.Dataset;
+namespace EurovisionApi.Server.Database.Models.Dataset;
 
 public class Score
 {

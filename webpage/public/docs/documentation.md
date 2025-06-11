@@ -64,16 +64,16 @@ It returns a collection of all references to contests held. Each contest referen
 
 ### Contest reference (scheme)
 
-| Attribute | Type | Description |  
-|---|---|---|
-| year | integer | Year in which the contest was held |
-| arena | string | Building where the contest was held |
-| city | string | Host city |
-| country | string | Host country code |
-| intendedCountry | string | If not null stores the code of the country that should have been the host but couldn't (Ukraine 2023)
-| slogan | string | Slogan of the contest |
-| logoUrl | string | Link to contest thumbnail |
-| url | string | Endpoint to get contest details |
+| Attribute       | Type    | Description                                                                                           |  
+| --------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| year            | integer | Year in which the contest was held                                                                    |
+| arena           | string  | Building where the contest was held                                                                   |
+| city            | string  | Host city                                                                                             |
+| country         | string  | Host country code                                                                                     |
+| intendedCountry | string  | If not null stores the code of the country that should have been the host but couldn't (Ukraine 2023) |
+| slogan          | string  | Slogan of the contest                                                                                 |
+| logoUrl         | string  | Link to contest thumbnail                                                                             |
+| url             | string  | Endpoint to get contest details                                                                       |
 
 
 ## Get contest details (endpoint)
@@ -90,7 +90,6 @@ It returns all data for a contest. The contestants in the contest is a collectio
         "intendedCountry": "UA",
         "slogan": "United By Music",
         "logoUrl": "https://example.com/contests-logos/2023.png",
-        "voting": "Televoting from participating countries + Online voting",
         "presenters": [
             "Alesha Dixon"
         ],
@@ -194,49 +193,48 @@ It returns all data for a contest. The contestants in the contest is a collectio
 
 ### Contest (scheme)
 
-| Attribute | Type | Description |  
-|---|---|---|
-| year | integer | Year in which the contest was held |
-| arena | string | Building where the contest was held |
-| city | string | Host city |
-| country | string | Host country code |
-| intendedCountry | string | If not null stores the code of the country that should have been the host but couldn't (Ukraine 2023)
-| slogan | string | Slogan of the contest |
-| logoUrl | string | Link to contest thumbnail |
-| voting | string | Information about the voting system |
-| presenters | string[] | Presenters of the edition |
-| broadcasters | string[] | Host broadcasters of the contest |
-| contestants | Contestant reference[] | Endpoint to get contestant details |
-| rounds | Round[] | All rounds of the contest |
+| Attribute       | Type                   | Description                                                                                           |  
+| --------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| year            | integer                | Year in which the contest was held                                                                    |
+| arena           | string                 | Building where the contest was held                                                                   |
+| city            | string                 | Host city                                                                                             |
+| country         | string                 | Host country code                                                                                     |
+| intendedCountry | string                 | If not null stores the code of the country that should have been the host but couldn't (Ukraine 2023) |
+| slogan          | string                 | Slogan of the contest                                                                                 |
+| logoUrl         | string                 | Link to contest thumbnail                                                                             |
+| presenters      | string[]               | Presenters of the edition                                                                             |
+| broadcasters    | string[]               | Host broadcasters of the contest                                                                      |
+| contestants     | Contestant reference[] | Endpoint to get contestant details                                                                    |
+| rounds          | Round[]                | All rounds of the contest                                                                             |
 
 ### Contestant reference (scheme)
 
-| Attribute | Type | Description |  
-|---|---|---|
-| id | integer | Contestant ID (used in Performance) |
-| country | string | Code of the country that is represented |
-| artist | string | Name of the singer/group performing |
-| song | string | Song title |
-| url | string | Endpoint to get contestant details |
+| Attribute | Type    | Description                             |  
+| --------- | ------- | --------------------------------------- |
+| id        | integer | Contestant ID (used in Performance)     |
+| country   | string  | Code of the country that is represented |
+| artist    | string  | Name of the singer/group performing     |
+| song      | string  | Song title                              |
+| url       | string  | Endpoint to get contestant details      |
 
 ### Round (scheme)
 
-| Attribute     | Type          | Description                                                                                                                    |
-| ------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Attribute     | Type          | Description |
+| ------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | name          | string        | Round name (final, semifinal if the year is between 2004 and 2007, semifinal1 or semifinal2 if the year is greater than 2007) |
-| date          | string        | Date when the round was held in UTC                                                                                            |
-| time          | string        | Time when the round was held in UTC                                                                                            |
-| performances  | Performance[] | Results of the performances of the contestants in this round                                                                   |
-| disqualifieds | int[]         | The id of the contestants who have been disqualified in the round                                                              |
+| date          | string        | Date when the round was held in UTC                                                                                           |
+| time          | string        | Time when the round was held in UTC                                                                                           |
+| performances  | Performance[] | Results of the performances of the contestants in this round                                                                  |
+| disqualifieds | int[]         | The id of the contestants who have been disqualified in the round                                                             |
 
 ### Performance (scheme)
 
-| Attribute    | Type    | Description          |
-| ------------ | ------- | -------------------- |
-| contestantId | integer | Contestant ID        |
-| running      | integer | Place on the running |
-| place        | integer | Place in the ranking |
-| scores       | Score[] | Score and voting     |
+| Attribute    | Type     | Description                        |
+| ------------ | -------- | ---------------------------------- |
+| contestantId | integer  | Contestant ID                      |
+| running      | integer  | Place on the running               |
+| place        | integer? | Place in the ranking. Can be null. |
+| scores       | Score[]  | Score and voting                   |
 
 ### Score (scheme)
 
@@ -277,6 +275,13 @@ It returns all about a contestant country and its song.
         "commentators": [
             "Edward af Sillén"
         ],
+        "jury": [
+            "Arantxa Álvarez",
+            "Clara Klingenström",
+            "Fredrik Kempe",
+            "Isa Molin",
+            "Robert Stefan Sehlberg"
+        ]
         "lyrics": [
             {
                 "languages": [
@@ -294,18 +299,19 @@ It returns all about a contestant country and its song.
 It represents each of the contestant songs of the edition.
 
 | Attribute | Type | Description |  
-|---|---|---|
+| -------- | ------- | ------------------------------------------------------------------- |
 | id | integer | Contestant ID (used in Performance) |
 | country | string | Code of the country that is represented |
 | artist | string | Name of the singer/group performing |
+| artistPeople | string[] | The real name of the artist; if the artist is a group, the names correspond to the group’s members  |
 | song | string | Song title |
 | lyrics | Lyrics[] | All lyrics of the song with translations (in the corresponding language). The first lyrics is the original. |
 | videoUrls | string[] | Links to Youtube videos showing the song |
 | tone | string | Key and scale of the song |
-| bpm | integer | Beats per minute of the song |
+| bpm | integer? | Beats per minute of the song. Can be null. |
 | dancers | string[] | Song dancers |
 | backings | string[] | Song backings |
-| jury | string[] | Jury in song selection |
+| jury | string[] | This is the professional jury responsible for awarding the votes |
 | composers | string[] | Song composers |
 | lyricists | string[] | Song lyricists |
 | writers | string[] | Song writers |
@@ -319,11 +325,11 @@ It represents each of the contestant songs of the edition.
 
 It represents the original lyrics of the song and each of the translations of the lyrics (indicating their languages).
 
-| Attribute | Type | Description |  
-|---|---|---|
-| languages | string[] | All languages that contains the song lyrics |
-| title | string | The song title |
-| content | string | The song lyrics, paragraphs are separated by double line break ("\n\n")|
+| Attribute | Type     | Description                                                            |  
+| --------- | -------- | ---------------------------------------------------------------------- |
+| languages | string[] | All languages that contains the song lyrics                            |
+| title     | string   | The song title                                                         |
+| content   | string   | The song lyrics, paragraphs are separated by double line break ("\n\n")|
 
 ## Years (endpoint)
 
