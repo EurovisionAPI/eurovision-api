@@ -10,7 +10,7 @@ public class ContestRepository
 
     public ContestRepository(Models.Dataset.Contest[] contests, string deployUrl, bool isJunior = false)
     {
-        string contestsUrl = $"{deployUrl}api/{(isJunior ? "junior/" : "")}contests";
+        string contestsUrl = $"{deployUrl}api/{(isJunior ? "junior" : "senior")}/contests";
 
         CacheContest(contests, contestsUrl);
     }
