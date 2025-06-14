@@ -38,7 +38,7 @@ It returns a collection of all references to contests held. Each contest referen
         "intendedCountry": null,
         "slogan": null,
         "logoUrl": "https://raw.githubusercontent.com/EurovisionAPI/dataset/main/logos/senior/1956.png",
-        "url": "https://eurovisionapi.runasp.net/api/contests/1956"
+        "url": "https://eurovisionapi.runasp.net/api/senior/contests/1956"
     },    
     {
         "year": 2012,
@@ -48,7 +48,7 @@ It returns a collection of all references to contests held. Each contest referen
         "intendedCountry": null,
         "slogan": "Light Your Fire!",
         "logoUrl": "https://raw.githubusercontent.com/EurovisionAPI/dataset/main/logos/senior/2012.png",
-        "url": "https://eurovisionapi.runasp.net/api/contests/2012"
+        "url": "https://eurovisionapi.runasp.net/api/senior/contests/2012"
     },    
     {
         "year": 2023,
@@ -58,7 +58,7 @@ It returns a collection of all references to contests held. Each contest referen
         "intendedCountry": "UA",
         "slogan": "United By Music",
         "logoUrl": "https://raw.githubusercontent.com/EurovisionAPI/dataset/main/logos/senior/2023.png",
-        "url": "https://eurovisionapi.runasp.net/api/contests/2023"
+        "url": "https://eurovisionapi.runasp.net/api/senior/contests/2023"
     }]
 }@
 
@@ -102,7 +102,7 @@ It returns all data for a contest. The contestants in the contest is a collectio
                 "country": "SE",
                 "artist": "Loreen",
                 "song": "Tattoo",
-                "url": "https://eurovisionapi.runasp.net/api/contests/2023/contestants/0"
+                "url": "https://eurovisionapi.runasp.net/api/senior/contests/2023/contestants/0"
             }
         ],
         "rounds": [
