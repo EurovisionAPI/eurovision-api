@@ -294,7 +294,13 @@ It returns all about a contestant country and its song.
             "Edward af Sillén",
             "Måns Zelmerlöw"
         ],
-        "jury": null,
+        "jury": [
+            "Arantxa Álvarez",
+            "Clara Klingenström",
+            "Fredrik Kempe",
+            "Isa Molin",
+            "Robert Stefan Sehlberg"
+        ],
         "spokesperson": "Farah Abadi"
     }
 }@
