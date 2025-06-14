@@ -21,23 +21,5 @@ export class DocumentationComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.documentation = await this.service.getDocumentation();
-
-    /*
-    // Reemplazar bloques de metadatos con componentes
-    setTimeout(() => {
-      const container = this.markdownContainer.nativeElement;
-      const metaBlocks = container.querySelectorAll('div[metadata]');
-
-      metaBlocks.forEach((block: HTMLElement) => {
-        const meta = block.getAttribute('metadata');
-        console.log(meta)
-        const viewRef = this.viewContainerRef.createEmbeddedView(this.endpointViewer, {
-          data: meta
-        });
-
-        // Reemplazamos el bloque con el contenido del ng-template
-        block.replaceWith(viewRef.rootNodes[0]);
-      });
-    }, 0);*/
   }
 }

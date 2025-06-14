@@ -26,7 +26,6 @@ public class ContestCache
             IntendedCountry = contest.IntendedCountry,
             Slogan = contest.Slogan,
             LogoUrl = contest.LogoUrl,
-            Voting = contest.Voting,
             Presenters = contest.Presenters,
             Broadcasters = contest.Broadcasters,
             Rounds = contest.Rounds
@@ -65,20 +64,25 @@ public class ContestCache
             Country = contestant.Country,
             Artist = contestant.Artist,
             Song = contestant.Song,
-            Lyrics = contestant.Lyrics,
             VideoUrls = contestant.VideoUrls,
-            Dancers = contestant.Dancers,
+            Lyrics = contestant.Lyrics,
+            Bpm = contestant.Bpm,
+            Tone = contestant.Tone,
+
+            ArtistPeople = contestant.ArtistPeople,
             Backings = contestant.Backings,
+            Dancers = contestant.Dancers,
+            StageDirector = contestant.StageDirector,
+            
             Composers = contestant.Composers,
+            Conductor = contestant.Conductor,
             Lyricists = contestant.Lyricists,
             Writers = contestant.Writers,
-            Conductor = contestant.Conductor,
-            StageDirector = contestant.StageDirector,
-            Tone = contestant.Tone,
-            Bpm = contestant.Bpm,
+            
             Broadcaster = contestant.Broadcaster,
-            Spokesperson = contestant.Spokesperson,
-            Commentators = contestant.Commentators
+            Commentators = contestant.Commentators,
+            Jury = contestant.Jury,
+            Spokesperson = contestant.Spokesperson
         };
     }
 }

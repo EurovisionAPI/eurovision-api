@@ -16,7 +16,8 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllers();
-        builder.Services.AddSingleton(await DataContext.CreateAsync(builder.Configuration));
+        builder.Services.Configure<Settings>(builder.Configuration.GetSection(nameof(Settings)));
+        builder.Services.AddSingleton<DataContext>();
 
         WebApplication app = builder.Build();
 
@@ -38,11 +39,19 @@ public class Program
         app.Map("api/{**slug}", HandleApiFallbackAsync); // Si no se encuentra la ruta en la API, devolver 404
         app.MapFallbackToFile("index.html"); // Configurar rutas para servir Angular
 
+        await InitDatabaseAsync(app.Services);
+
         await app.RunAsync();
     }
 
     private static IResult HandleApiFallbackAsync(HttpContext context)
     {
         return Results.NotFound($"Cannot {context.Request.Method} {context.Request.Path}");
+    }
+
+    private static Task InitDatabaseAsync(IServiceProvider serviceProvider)
+    {
+        DataContext dataContext = serviceProvider.GetRequiredService<DataContext>();
+        return dataContext.DownloadDatasetAsync();
     }
 }
