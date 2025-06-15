@@ -33,7 +33,7 @@ jobs:
     
       - name: Get HMAC signature
         run: |
-          SECRET="${{ secrets.UPDATE_DATASET_SECRET }}"
+          SECRET='${{ secrets.UPDATE_DATASET_SECRET }}'
           SIGNATURE=$(echo -n "$RELEASE_NAME" | openssl dgst -sha256 -hmac "$SECRET" | sed 's/^.* //')
           echo "SIGNATURE=$SIGNATURE" >> $GITHUB_ENV
 
