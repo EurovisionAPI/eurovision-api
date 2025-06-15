@@ -39,6 +39,6 @@ jobs:
 
       - name: Call API update endpoint
         run: |
-          curl -X GET "https://d9a2-83-60-147-72.ngrok-free.app/api/dataset/update?releaseName=$RELEASE_NAME" --fail \
+          curl -X GET "https://eurovisionapi.runasp.net/api/dataset/update?releaseName=$RELEASE_NAME" --fail \
             -H "X-Hub-Signature-256: $SIGNATURE" \
             -H "Content-Type: application/json"
