@@ -1,0 +1,44 @@
+name: Update dataset
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseName:
+        description: 'Release name (optional: If empty, it will use the latest.)'
+        required: false
+  repository_dispatch:
+    types: [update-dataset]
+
+jobs:
+  notificate-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Initialize variables
+        run: |
+          RELEASE_INPUT="${{ github.event.inputs.releaseName || github.event.client_payload.releaseName }}"
+          if [ -n "$RELEASE_INPUT" ]; then
+            echo "Using published release: $RELEASE_INPUT"
+            echo "RELEASE_NAME=$RELEASE_INPUT" >> $GITHUB_ENV
+          else
+            # Get the latest release tag
+            LATEST=$(curl -s \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/EurovisionApi/dataset/releases/latest \
+              | jq -r .tag_name)
+            echo "Using latest published release: $LATEST"
+            echo "RELEASE_NAME=$LATEST" >> $GITHUB_ENV
+          fi
+    
+      - name: Get HMAC signature
+        run: |
+          SECRET="${{ secrets.UPDATE_DATASET_SECRET }}"
+          SIGNATURE=$(echo -n "$RELEASE_NAME" | openssl dgst -sha256 -hmac "$SECRET" | sed 's/^.* //')
+          echo "SIGNATURE=$SIGNATURE" >> $GITHUB_ENV
+
+      - name: Call API update endpoint
+        run: |
+          curl -X GET "https://d9a2-83-60-147-72.ngrok-free.app/api/dataset/update?releaseName=$RELEASE_NAME" --fail \
+            -H "X-Hub-Signature-256: $SIGNATURE" \
+            -H "Content-Type: application/json"
