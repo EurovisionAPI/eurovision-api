@@ -17,6 +17,11 @@
 			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
 		</PropertyGroup>
 		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
+		<!-- Copy the content of the Angular browser folder -->
+		<Exec Command="xcopy /E /Y /I &quot;$(ProjectDir)wwwroot\browser\*&quot; &quot;$(ProjectDir)wwwroot&quot;" />
+		<!-- Remove Angular browser folder and useless files -->
+		<Exec Command="rmdir /S /Q &quot;$(ProjectDir)wwwroot\browser&quot;" />
+		<Exec Command="del /Q &quot;$(ProjectDir)wwwroot\prerendered-routes.json&quot;" />
 	</Target>
 
 	<Target Name="BuildAngularPublish" BeforeTargets="Restore" Condition="'$(Configuration)' == 'Release'">
