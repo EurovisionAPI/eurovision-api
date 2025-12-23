@@ -17,18 +17,18 @@
 			<AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
 		</PropertyGroup>
+		<!-- Build webpage in temporal folder -->
+		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)$(AngularBuildFolder)&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
 		<ItemGroup>
 			<AngularFiles Include="$(ProjectDir)$(AngularBuildFolder)/browser/**/*.*" />
 		</ItemGroup>
-		<!-- Build webpage in temporal folder -->
-		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)$(AngularBuildFolder)&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
 		<!-- Copy the content of the Angular build browser folder -->
 		<Copy SourceFiles="@(AngularFiles)" DestinationFolder="$(ProjectDir)wwwroot/%(RecursiveDir)" />
 		<!-- Remove Angular temporal build folder -->
 		<RemoveDir Directories="$(ProjectDir)$(AngularBuildFolder)" />
 	</Target>
 
-	<Target Name="BuildAngularPublish" BeforeTargets="Publish" Condition="'$(Configuration)' == 'Release'">
+	<Target Name="BuildAngularPublish" BeforeTargets="Restore" Condition="'$(Configuration)' == 'Release'">
 		<CallTarget Targets="BuildAngular" />
 	</Target>
 
