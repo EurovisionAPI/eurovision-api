@@ -28,7 +28,7 @@
 		<RemoveDir Directories="$(ProjectDir)$(AngularBuildFolder)" />
 	</Target>
 
-	<Target Name="BuildAngularPublish" BeforeTargets="Restore" Condition="'$(Configuration)' == 'Release'">
+	<Target Name="BuildAngularPublish" BeforeTargets="Publish" Condition="'$(Configuration)' == 'Release'">
 		<CallTarget Targets="BuildAngular" />
 	</Target>
 
