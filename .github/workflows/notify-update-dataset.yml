@@ -1,4 +1,4 @@
-name: Update dataset
+name: Notify update dataset
 
 on:
   workflow_dispatch:
