@@ -13,15 +13,19 @@
 	<Target Name="BuildAngular">
 		<PropertyGroup>
 			<AngularAppPath>../../webpage</AngularAppPath>
+			<AngularBuildFolder>webpage-build</AngularBuildFolder>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Debug'">development</AngularConfiguration>
 			<AngularConfiguration Condition="'$(Configuration)' == 'Release'">production</AngularConfiguration>
 		</PropertyGroup>
-		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)wwwroot&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
-		<!-- Copy the content of the Angular browser folder -->
-		<Exec Command="xcopy /E /Y /I &quot;$(ProjectDir)wwwroot\browser\*&quot; &quot;$(ProjectDir)wwwroot&quot;" />
-		<!-- Remove Angular browser folder and useless files -->
-		<Exec Command="rmdir /S /Q &quot;$(ProjectDir)wwwroot\browser&quot;" />
-		<Exec Command="del /Q &quot;$(ProjectDir)wwwroot\prerendered-routes.json&quot;" />
+		<ItemGroup>
+			<AngularFiles Include="$(ProjectDir)$(AngularBuildFolder)/browser/**/*.*" />
+		</ItemGroup>
+		<!-- Build webpage in temporal folder -->
+		<Exec Command="ng build --configuration $(AngularConfiguration) --output-path=&quot;$(ProjectDir)$(AngularBuildFolder)&quot;" WorkingDirectory="$(AngularAppPath)" ContinueOnError="False" />
+		<!-- Copy the content of the Angular build browser folder -->
+		<Copy SourceFiles="@(AngularFiles)" DestinationFolder="$(ProjectDir)wwwroot/%(RecursiveDir)" />
+		<!-- Remove Angular temporal build folder -->
+		<RemoveDir Directories="$(ProjectDir)$(AngularBuildFolder)" />
 	</Target>
 
 	<Target Name="BuildAngularPublish" BeforeTargets="Restore" Condition="'$(Configuration)' == 'Release'">
