@@ -46,7 +46,7 @@ jobs:
         working-directory: ${{ env.SERVER_FOLDER }}
 
       # Turn off deployed service
-      - name: Create empty app_offline.htm file
+      - name: Create empty app_offline.html file
         run: |
           mkdir -p ./offline
           touch ./offline/app_offline.html
