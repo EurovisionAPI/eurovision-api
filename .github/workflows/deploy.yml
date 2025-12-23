@@ -24,10 +24,10 @@ jobs:
       - name: Install Node.js and Angular
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install Angular CLI
-        run: npm install -g @angular/cli@19
+        run: npm install -g @angular/cli@21
 
       - name: Checkout repository
         uses: actions/checkout@v5
