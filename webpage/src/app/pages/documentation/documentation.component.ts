@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.component';
 import { SafeHtml } from '@angular/platform-browser';
 import { DocumentationService } from '../../services/documentation.service';
@@ -15,11 +15,10 @@ import { NgTemplateOutlet } from '@angular/common';
 export class DocumentationComponent implements OnInit {
   DocItemType = DocItemType;
 
-  documentation: Documentation;
-
-  constructor(private service: DocumentationService) {}
+  documentation = signal<Documentation | null>(null);
+  private service = inject(DocumentationService);
 
   async ngOnInit(): Promise<void> {
-    this.documentation = await this.service.getDocumentation();
+    this.documentation.set(await this.service.getDocumentation());
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
 import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.component';
@@ -12,10 +12,10 @@ import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.co
 export class HomeComponent implements OnInit {
   apiUrl: string;
   requestUrl = 'senior/contests/2025';
-  response: object;
-  hasError: boolean;
+  response = signal<object | null>(null);
+  hasError = signal<boolean>(false);
 
-  constructor(private api: ApiService) {}
+  private api = inject(ApiService);
 
   async ngOnInit(): Promise<void> {
     this.apiUrl = this.api.getApiUrl();
@@ -28,10 +28,10 @@ export class HomeComponent implements OnInit {
 
   async sendRequest(): Promise<void> {
     try {
-      this.response = await this.api.get(this.requestUrl);
-      this.hasError = false;
+      this.response.set(await this.api.get(this.requestUrl));
+      this.hasError.set(false);
     } catch (error) {
-      this.hasError = true;
+      this.hasError.set(true);
     }
   }
 }

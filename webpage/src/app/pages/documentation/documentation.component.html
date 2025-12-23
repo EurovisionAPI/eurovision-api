@@ -1,8 +1,7 @@
-@if (documentation) {
-  @for (item of documentation.content; track $index) {
+@if (documentation()) {
+  @for (item of documentation().content; track $index) {
     @if (item.type === DocItemType.HTML) {
       <div #markdownContainer [outerHTML]="item.value"></div>
-      <!--<ng-container [innerHTML]="item.value"></ng-container>-->
     } @else {
       <ng-container
         *ngTemplateOutlet="endpointViewer; context: { data: item.value }"

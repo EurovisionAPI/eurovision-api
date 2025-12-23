@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
@@ -9,8 +9,7 @@ import { lastValueFrom } from 'rxjs';
 export class ApiService {
 
   private apiUrl: string = environment.apiUrl;
-
-  constructor(private httpClient: HttpClient) { }
+  private httpClient = inject(HttpClient);
 
   getApiUrl(): string {
     return this.apiUrl;
