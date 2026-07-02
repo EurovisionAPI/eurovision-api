@@ -11,7 +11,7 @@ import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.co
 })
 export class HomeComponent implements OnInit {
   apiUrl: string;
-  requestUrl = 'senior/contests/2025';
+  requestUrl = 'senior/contests/2026';
   response = signal<object | null>(null);
   hasError = signal<boolean>(false);
 
