@@ -24,17 +24,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
         
-      - name: Install Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: "pnpm"
-          cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
           version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
 
       - name: Install pnpm packages
         run: pnpm install --frozen-lockfile
