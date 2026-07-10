@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
 import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.component';

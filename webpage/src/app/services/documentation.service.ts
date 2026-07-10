@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Documentation } from '../models/documentation';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { marked } from 'marked';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -20,8 +20,8 @@ export class DocumentationService {
     private sanitizer: DomSanitizer,
   ) {
     marked.setOptions({
-      gfm: true, // Soporte para GitHub Flavored Markdown
-      breaks: true, // Saltos de línea automáticos
+      gfm: true, // Supports GitHub Flavored Markdown
+      breaks: true, // Supports automatic line breaks
     });
   }
 
@@ -32,7 +32,7 @@ export class DocumentationService {
         this.httpClient.get(this.FILE_URL, { responseType: 'text' }),
       );
 
-      // Detectar metadatos
+      // Detect metadata blocks in the markdown and process them
       const metaDataRegex = /@{.*?}@/gs;
       const matches = markdown.matchAll(metaDataRegex);
       let startHtmlIndex = 0;

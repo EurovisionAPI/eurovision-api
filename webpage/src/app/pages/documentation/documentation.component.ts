@@ -1,6 +1,12 @@
-import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.component';
-import { SafeHtml } from '@angular/platform-browser';
 import { DocumentationService } from '../../services/documentation.service';
 import { DocItemType, Documentation } from '../../models/documentation';
 import { NgTemplateOutlet } from '@angular/common';

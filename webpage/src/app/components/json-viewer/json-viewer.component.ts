@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './json-viewer.component.css',
 })
 export class JsonViewerComponent implements OnChanges {
+  // TODO: Use signals instead of ngOnChanges to update the jsonRoot and jsonRaw values when the json input changes.
   @Input() json: any;
   @Input() maxSizeStartExpanded: number = 3;
 
