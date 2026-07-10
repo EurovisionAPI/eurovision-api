@@ -36,7 +36,10 @@ jobs:
           cache: pnpm
           cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
 
-      - name: Install pnpm packages
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@22
+
+      - name: Install webpage pnpm packages
         run: pnpm install --frozen-lockfile
         working-directory: ${{ env.CLIENT_FOLDER }}
 
