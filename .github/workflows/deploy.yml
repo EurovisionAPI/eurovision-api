@@ -21,10 +21,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Node.js and Angular
-        uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        
+      - name: Install Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: 24
           cache: "pnpm"
           cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
 
@@ -32,9 +35,6 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 11
-
-      - name: Checkout repository
-        uses: actions/checkout@v5
 
       - name: Install pnpm packages
         run: pnpm install --frozen-lockfile
