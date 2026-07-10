@@ -4,6 +4,8 @@ This is a **consumption-only** API, only the HTTP GET method is available on res
 
 No authentication is required to access this API, and all resources are fully open and available.
 
+To ensure fair usage and service availability, requests are rate-limited to 100 requests per burst, with the limit replenished at 2 requests per second. If the limit is exceeded, the API returns HTTP 429 (Too Many Requests).
+
 # Countries
 
 A dictionary of strings with the relationship between the codes and the names of the countries that have ever participated in the contest.

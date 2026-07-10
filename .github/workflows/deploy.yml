@@ -25,15 +25,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "24"
+          cache: "pnpm"
+          cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
 
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli@21
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
 
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Install npm packages
-        run: npm install
+      - name: Install pnpm packages
+        run: run: pnpm install --frozen-lockfile
         working-directory: ${{ env.CLIENT_FOLDER }}
 
       - name: Setup .NET SDK
