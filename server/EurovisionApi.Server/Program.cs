@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using EurovisionApi.Server.Database;
 
 namespace EurovisionApi.Server;
@@ -19,6 +20,21 @@ public class Program
         builder.Services.Configure<Settings>(builder.Configuration.GetSection(nameof(Settings)));
         builder.Services.AddSingleton<DataContext>();
 
+        // Allow bursts of up to 100 requests and refill at 2 requests per second (120/min sustained).
+        builder.Services.AddRateLimiter(options =>
+        {
+            options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+            options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+                RateLimitPartition.GetTokenBucketLimiter(
+                    partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                    factory: partition => new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 100,
+                        TokensPerPeriod = 2,
+                        ReplenishmentPeriod = TimeSpan.FromSeconds(1)
+                    }));
+        });
+
         WebApplication app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -27,6 +43,7 @@ public class Program
             app.MapOpenApi();
         }
 
+        app.UseRateLimiter();
         app.UseCors(options => options.AllowAnyOrigin());
         app.UseHttpsRedirection();
         app.UseRouting();
