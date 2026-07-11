@@ -21,23 +21,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Node.js and Angular
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: "pnpm"
-          cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
-
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
           version: 11
 
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ${{ env.CLIENT_FOLDER }}/pnpm-lock.yaml
 
-      - name: Install pnpm packages
-        run: run: pnpm install --frozen-lockfile
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@22
+
+      - name: Install webpage pnpm packages
+        run: pnpm install --frozen-lockfile
         working-directory: ${{ env.CLIENT_FOLDER }}
 
       - name: Setup .NET SDK
