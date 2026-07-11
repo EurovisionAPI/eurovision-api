@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, computed, input, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,48 +8,39 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './json-viewer.component.html',
   styleUrl: './json-viewer.component.css',
 })
-export class JsonViewerComponent implements OnChanges {
-  // TODO: Use signals instead of ngOnChanges to update the jsonRoot and jsonRaw values when the json input changes.
-  @Input() json: any;
-  @Input() maxSizeStartExpanded: number = 3;
+export class JsonViewerComponent {
+  readonly json = input.required<any>();
+  readonly maxSizeStartExpanded = input<number>(3);
 
-  jsonRoot: JsonNode;
-  jsonRaw: string;
-  totalLines: number;
-  totalBytes: number;
-  showRaw: boolean = false;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.json) {
-      this.jsonRoot = this.createNode('root', this.json);
-      this.jsonRaw = JSON.stringify(this.json, null, 2);
-      this.totalLines = this.jsonRaw.split('\n').length;
-      this.totalBytes = new TextEncoder().encode(this.jsonRaw).length / 1000;
-    } else {
-      this.jsonRoot = this.jsonRaw = this.totalLines = null;
-    }
-  }
-
-  getChildren(node: JsonNode): JsonNode[] {
-    if (!node.children) {
-      node.children = this.getNodes(node.value);
+  readonly showRaw = signal(false);
+  readonly parsedJson = computed<ParsedJson>(() => {
+    const json = this.json();
+    if (json == null) {
+      return { root: null, raw: null, totalLines: 0, totalBytes: 0 };
     }
 
-    return node.children;
-  }
+    const root = this.createNode('root', json, true);
+    const raw = JSON.stringify(json, null, 2);
+    const totalLines = raw.split('\n').length;
+    const totalBytes = new TextEncoder().encode(raw).length / 1000;
 
-  private createNode(key: string, value: any): JsonNode {
+    return { root, raw, totalLines, totalBytes };
+  });
+
+  private createNode(key: string, value: any, isRoot: boolean = false): JsonNode {
     const type = this.getType(value);
     const isExpandable = type == JsonType.Object || type == JsonType.Array;
     const size = this.getSize(type, value);
     const info = this.getInfo(type, size);
+    const expanded = 0 <= size && size <= this.maxSizeStartExpanded();
+    const children = isRoot || (isExpandable && expanded) ? this.getNodes(value) : null;
 
     switch (type) {
       case JsonType.Null:
         value = 'null';
         break;
       case JsonType.String:
-        value = '"' + value + '"';
+        value = `"${value}"`;
         break;
     }
 
@@ -58,21 +49,21 @@ export class JsonViewerComponent implements OnChanges {
       key,
       value,
       isExpandable,
-      expanded: size && size <= this.maxSizeStartExpanded,
+      expanded: signal(expanded),
       info,
-      children: null,
+      children: signal(children),
     };
   }
 
   private getNodes(obj: any): JsonNode[] {
-    if (obj === null || obj === undefined) return [];
-
     const nodes: JsonNode[] = [];
 
-    for (const key of Object.keys(obj)) {
-      const value = obj[key];
+    if (obj != null && obj !== undefined) {
+      for (const key of Object.keys(obj)) {
+        const value = obj[key];
 
-      nodes.push(this.createNode(key, value));
+        nodes.push(this.createNode(key, value));
+      }
     }
 
     return nodes;
@@ -110,7 +101,7 @@ export class JsonViewerComponent implements OnChanges {
     return size;
   }
 
-  private getInfo(type: JsonType, size: number) {
+  private getInfo(type: JsonType, size: number): string | null {
     let info = null;
 
     if (type == JsonType.Object) {
@@ -127,7 +118,13 @@ export class JsonViewerComponent implements OnChanges {
   }
 
   toggleNode(node: JsonNode): void {
-    node.expanded = !node.expanded;
+    const willExpand = !node.expanded();
+
+    if (willExpand && !node.children()) {
+      node.children.set(this.getNodes(node.value));
+    }
+
+    node.expanded.set(willExpand);
   }
 }
 
@@ -140,26 +137,19 @@ enum JsonType {
   Array = 'array',
 }
 
+interface ParsedJson {
+  root: JsonNode | null;
+  raw: string | null;
+  totalLines: number;
+  totalBytes: number;
+}
+
 interface JsonNode {
   type: JsonType;
   key: string;
   value: any;
-  //level: number;
   isExpandable: boolean;
-  expanded: boolean;
-  info: string;
-  children: JsonNode[];
-  //path: string[];
+  expanded: WritableSignal<boolean>;
+  info: string | null;
+  children: WritableSignal<JsonNode[] | null>;
 }
-
-/*
-interface JsonNode {
-  key: string;
-  value: any;
-  level: number;
-  type: Type;
-
-  isExpandable: boolean;
-  expanded: boolean;
-  path: string[];
-}*/

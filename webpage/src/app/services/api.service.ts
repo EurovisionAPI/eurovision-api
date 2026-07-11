@@ -7,9 +7,8 @@ import { lastValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-
-  private apiUrl: string = environment.apiUrl;
-  private httpClient = inject(HttpClient);
+  private readonly apiUrl: string = environment.apiUrl;
+  private readonly httpClient = inject(HttpClient);
 
   getApiUrl(): string {
     return this.apiUrl;

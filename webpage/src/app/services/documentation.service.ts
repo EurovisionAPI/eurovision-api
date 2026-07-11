@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Documentation } from '../models/documentation';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -10,15 +10,15 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class DocumentationService {
-  readonly FILE_URL = 'docs/documentation.md';
+  private readonly FILE_URL = 'docs/documentation.md';
 
-  private documentation: Documentation;
-  private apiUrl: string = environment.apiUrl;
+  private readonly httpClient = inject(HttpClient);
+  private readonly sanitizer = inject(DomSanitizer);
 
-  constructor(
-    private httpClient: HttpClient,
-    private sanitizer: DomSanitizer,
-  ) {
+  private readonly apiUrl: string = environment.apiUrl;
+  private documentation: Documentation | null = null;
+
+  constructor() {
     marked.setOptions({
       gfm: true, // Supports GitHub Flavored Markdown
       breaks: true, // Supports automatic line breaks
@@ -52,12 +52,7 @@ export class DocumentationService {
     return this.documentation;
   }
 
-  private addHtml(
-    startIndex: number,
-    end: number,
-    markdown: string,
-    documentation: Documentation,
-  ) {
+  private addHtml(startIndex: number, end: number, markdown: string, documentation: Documentation) {
     const subMarkdown = markdown.substring(startIndex, end);
 
     if (subMarkdown.length > 0) {

@@ -10,15 +10,16 @@ import { JsonViewerComponent } from '../../components/json-viewer/json-viewer.co
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  apiUrl: string;
-  requestUrl = 'senior/contests/2026';
-  response = signal<object | null>(null);
-  hasError = signal<boolean>(false);
 
   private api = inject(ApiService);
 
+  readonly requestUrl = signal('senior/contests/2026');
+  readonly response = signal<object | null>(null);
+  readonly hasError = signal<boolean>(false);
+
+  readonly apiUrl = this.api.getApiUrl();
+
   async ngOnInit(): Promise<void> {
-    this.apiUrl = this.api.getApiUrl();
     await this.sendRequest();
   }
 
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   async sendRequest(): Promise<void> {
     try {
-      this.response.set(await this.api.get(this.requestUrl));
+      this.response.set(await this.api.get(this.requestUrl()));
       this.hasError.set(false);
     } catch (error) {
       this.hasError.set(true);

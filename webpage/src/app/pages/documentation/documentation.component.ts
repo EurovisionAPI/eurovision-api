@@ -14,8 +14,9 @@ import { NgTemplateOutlet } from '@angular/common';
 export class DocumentationComponent implements OnInit {
   DocItemType = DocItemType;
 
-  documentation = signal<Documentation | null>(null);
-  private service = inject(DocumentationService);
+  private readonly service = inject(DocumentationService);
+
+  readonly documentation = signal<Documentation | null>(null);
 
   async ngOnInit(): Promise<void> {
     this.documentation.set(await this.service.getDocumentation());
